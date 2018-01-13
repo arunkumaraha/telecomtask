@@ -1,0 +1,165 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.3
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Jan 13, 2018 at 05:40 PM
+-- Server version: 5.6.35
+-- PHP Version: 7.1.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `telecom`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service_providers`
+--
+
+CREATE TABLE `service_providers` (
+  `id` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `service_providers`
+--
+
+INSERT INTO `service_providers` (`id`, `name`) VALUES
+(101, 'Bsnl'),
+(102, 'Airtel'),
+(103, 'Vodafone');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `number` bigint(11) NOT NULL,
+  `created_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `number`, `created_date`) VALUES
+(1, 'Arunkumar', 9986047270, '2018-01-13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_fnf_numbers`
+--
+
+CREATE TABLE `user_fnf_numbers` (
+  `id` int(11) NOT NULL,
+  `number` bigint(20) NOT NULL,
+  `fnf_number` bigint(20) NOT NULL,
+  `provider` int(11) NOT NULL,
+  `status` enum('Active','Inactive','','') NOT NULL DEFAULT 'Active',
+  `created_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user_fnf_numbers`
+--
+
+INSERT INTO `user_fnf_numbers` (`id`, `number`, `fnf_number`, `provider`, `status`, `created_datetime`) VALUES
+(12, 7867868878, 2342232322332, 102, 'Active', '2018-01-13 18:43:45'),
+(13, 7867868878, 333333, 102, 'Active', '2018-01-13 18:50:05'),
+(14, 8888899999, 99860472701, 102, 'Active', '2018-01-13 18:55:35'),
+(15, 8888899999, 2423423, 101, 'Active', '2018-01-13 18:58:58'),
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_numbers`
+--
+
+CREATE TABLE `user_numbers` (
+  `id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `number` bigint(20) NOT NULL,
+  `provider` int(11) NOT NULL,
+  `status` enum('Active','Inactive','','') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user_numbers`
+--
+
+INSERT INTO `user_numbers` (`id`, `account_id`, `number`, `provider`, `status`) VALUES
+(1, 1, 7867868878, 101, 'Active'),
+(2, 1, 8888899999, 103, 'Active');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `service_providers`
+--
+ALTER TABLE `service_providers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_fnf_numbers`
+--
+ALTER TABLE `user_fnf_numbers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_numbers`
+--
+ALTER TABLE `user_numbers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `service_providers`
+--
+ALTER TABLE `service_providers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `user_fnf_numbers`
+--
+ALTER TABLE `user_fnf_numbers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `user_numbers`
+--
+ALTER TABLE `user_numbers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
